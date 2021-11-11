@@ -44,3 +44,46 @@ int main()
 
     return 0;
 }
+
+// OPTIMAL ======================================= TC = O(nlogn)*O(n), SC = O(1) =============================================================================
+
+/*
+1. Init 2 pointers pointing to start of both the arrays.
+2. Check whether (arr1[p1] < arr2[p2]) - in such case the elements are present in correct order so just inc the p1
+3. When you swap elements, always sort the 2nd array to ensure that the elements in arr2 are in sorted order
+*/
+
+int main()
+{
+    // Both arrays are given in sorted order
+    vector<int> arr1 {1, 4, 7, 8, 10};
+    int n1 = arr1.size();
+    vector<int> arr2 {2, 3, 9};
+    int n2 = arr2.size();
+    
+    int p1=0, p2=0;
+    
+    for(int i=0; i<n1+n2; i++){
+        if(arr1[p1] < arr2[p2]){
+            // Check if the pointer is going out of bound or not 
+            if(p1 < n1) p1++;
+            continue;
+        }
+        else{
+            swap(arr1[p1], arr2[p2]);
+            if(p1 < n1) p1++;
+            sort(arr2.begin(), arr2.end());
+        }
+    }
+    
+    //Print the sorted arrays
+    for(auto it: arr1){
+        cout<<it<<" ";
+    }
+    cout<<endl;
+    for(int i=0; i<n2; i++){
+        cout<<arr2[i]<<" ";
+    }
+
+    return 0;
+}
