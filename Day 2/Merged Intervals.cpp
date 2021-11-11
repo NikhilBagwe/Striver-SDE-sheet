@@ -40,7 +40,7 @@ int main()
     return 0;
 }
 
-// OPTIMAL =============================================================== O(n) ====================================================================================
+// OPTIMAL =============================================================== TC = O(nlogn) + O(n) , SC = O(n) ==================================================================
 
 int main()
 {
@@ -48,6 +48,13 @@ int main()
     int n = intervals.size();
     
     vector<vector<int>> mergedIntervals;
+    
+    // Just in case the given 'intervals' vector was empty, return empty mergedIntervals vector or '0'
+    if(intervals.size() == 0) return 0;
+    
+    // If the 'intervals' was not sorted just in case, sort it 
+    sort(intervals.begin(), intervals.end());
+    
     // Assign the 1st interval to tempInterval
     vector<int> tempInterval = intervals[0];
     
