@@ -6,7 +6,7 @@ int main()
 {
     double x = 2.00000;
     int n = -4, n1 = 0, flag = 0;
-    double ans = 2.00000;
+    double ans = 1;
     
     // Checking whether the 'n' is a negative or positive no.
     if(n < 0){
@@ -17,7 +17,7 @@ int main()
     else n1 = n;
     
     // Calculate the x^n1 
-    for(int i = 0; i<n1-1; i++){
+    for(int i = 0; i < n1; i++){
         ans *= x;
     }
     
