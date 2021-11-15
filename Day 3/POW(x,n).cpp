@@ -31,3 +31,43 @@ int main()
 
     return 0;
 }
+
+// OPTIMAL ===================================================================== TC = O(logn) =====================================================================
+
+// O(logn) as 'n' is getting divided by '2'
+
+int main()
+{
+    double x = 2.00000;
+    int n = -4, n1 = 0;
+    double ans = 1.0;
+    
+    // Checking whether the power i.e 'n' is a negative or positive no.
+    if(n < 0) n1 = abs(n);
+    else n1 = n;
+    
+    // Until 'n1' becomes '0'
+    while(n1){
+        // When power is odd 
+        if(n1 % 2){
+            ans *= x;
+            n1 -= 1;
+        }
+        
+        // When power is even
+        else{
+            x *= x;
+            n1 = n1/2;
+        }
+    }
+    
+    if(n > 0){
+        cout<<fixed<<setprecision(4)<<ans;
+    }
+    // If 'n' was negative then divide the 'ans' from 1 as "x^(-n) = 1 / x^n"
+    else{
+        cout<<fixed<<setprecision(4)<<1/ans;
+    }
+
+    return 0;
+}
