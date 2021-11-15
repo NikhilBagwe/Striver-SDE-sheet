@@ -85,3 +85,27 @@ eg: 10 C 3 = (8 x 9 x 10) / (1 x 2 x 3)
 
 - last 3 digits from 10 / digits from 3 to 1
 */
+
+int uniquePaths(int m, int n){
+    int N = n + m - 2;  // 3  - as per our example
+    int r = m - 1;      // 1
+    double result = 1;
+    
+    // Calculate the nCr using above formula 
+    for(int i=1; i<=r; i++){
+        result = result * (N - r + i) / i;
+    }
+    
+    return (int)result; 
+}
+
+int main()
+{
+    int m=2, n=3; // rows x columns
+    
+    int numberOfPaths = uniquePaths(m, n);
+    
+    cout<<numberOfPaths;
+    
+    return 0;
+}
