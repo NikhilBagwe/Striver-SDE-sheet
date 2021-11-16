@@ -45,3 +45,59 @@ int main()
 
     return 0;
 }
+
+// OPTIMAl ================= TWO SUM by SKIPPING DUPLICATE ELEMENTS =================== TC = O(n^3) =====================================================================
+
+int main()
+{
+    vector<int> nums {4,3,3,4,4,2,1,2,1,1};
+    int n = nums.size(), target = 9;
+    
+    sort(nums.begin(), nums.end());
+    
+    vector<vector<int>> ans;
+    
+    for(int i=0; i<n; i++){
+        for(int j=i+1; j<n; j++){
+            int s = j+1, e = n-1;
+            
+            int target_2 = target - nums[i] - nums[j];
+            
+            while(s < e){
+                int two_sum = nums[s] + nums[e];
+                
+                if(two_sum > target_2) e--;
+                
+                else if(two_sum < target_2) s++;
+                
+                else{
+                    vector<int> v(4, 0);
+                    v[0] = nums[i];
+                    v[1] = nums[j];
+                    v[2] = nums[s];
+                    v[3] = nums[e];
+                    ans.push_back(v);
+                    
+                    // Skipping duplicate elements if any
+                    while(s<e && nums[s]==v[2]) s++;
+                    while(s<e && nums[e]==v[3]) e--; 
+                }
+            }
+            
+            // Skipping duplicate elements if any
+            while(j+1<n && nums[j+1]==nums[j]) ++j;
+        }
+        
+        // Skipping duplicate elements if any
+        while(i+1<n && nums[i+1]==nums[i]) ++i;
+    }
+    
+    for(auto it : ans){
+        for(auto num : it){
+            cout<<num<<" ";
+        }
+        cout<<endl;
+    }
+
+    return 0;
+}
