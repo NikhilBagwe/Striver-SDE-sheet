@@ -1,0 +1,142 @@
+======================================================================================================================================================================
+
+1. Sort an array of 0's, 1's, 2's without using extra space or sorting algo.
+
+soln:
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int low=0;
+        int mid=0;
+        int high=nums.size() - 1;
+        
+        while(mid <= high){
+            switch(nums[mid]){
+                case 0:
+                    swap(nums[low++], nums[mid++]);
+                    break;
+                case 1:
+                    mid++;
+                    break;
+                case 2:
+                    swap(nums[mid], nums[high--]);
+                    break;
+            }
+        }
+    }
+};
+
+======================================================================================================================================================================
+
+2. TWO SUM = https://leetcode.com/problems/two-sum/submissions/
+
+============================================================ O(n) =======================
+int main()
+{
+    int arr[] = {2,7,11,15};
+    int k = 9;
+    
+    for(int i=0; i<4; i++){
+        
+        int sum =0;
+        
+        for(int j=i+1; j<4; j++){
+            sum = arr[i] + arr[j];
+            if(sum==k)
+                cout<<i<<" "<<j;
+        }
+    }
+
+    return 0;
+}
+
+============================================================ O(nlogn) =======================
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int t) {
+        int n = nums.size();
+        // initialize a vector containing pairs of {element, corresponding index} as we are goining to sort it afterwards
+        vector<pair<int, int>> vec;
+        for(int i=0; i<n; i++) vec.push_back({nums[i], i});
+        sort(vec.begin(), vec.end());
+        
+        // Two pointer approach - initialize a start and end pointer
+        int s=0, e=n-1;
+        while(s<e){
+            int sum = vec[s].first + vec[e].first;
+            
+            if(sum == t) return{vec[s].second, vec[e].second};
+            // if sum is greater, move to previous element i.e dec e
+            else if(sum > t) e--;
+            else s++;
+        }
+        return {-1,-1};
+    }
+};
+
+======================================================================================================================================================================
+
+3. Best Time to Buy and Sell Stock  = https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) 
+    {
+        int minPrice = INT_MAX;
+        int profit =0;
+        
+        for(int i=0; i<prices.size(); i++){
+            
+            minPrice = min(prices[i], minPrice);
+            profit = max(profit, prices[i] - minPrice);
+        }
+        return profit;
+    }
+};
+
+==================================================== Minimaize the heights ||============================
+
+int main()
+{
+    int n,k;
+    cin>>n>>k;
+    int a[n];
+    for(int i=0; i<n; i++) cin>>a[i];
+    
+    for(int i=0; i<n; i++){
+        int tower = a[i] - k;
+        if(tower <= 0){
+            a[i] += k;
+        }
+        else{
+            a[i] = tower;
+        }
+    }
+    
+    sort(a, a+n);
+    // int min =0 , max=0;
+    // if(a[0] > a[1]){
+    //     min = a[1];
+    //     max = a[0];
+    // }
+    // else{
+    //     min = a[0];
+    //     max = a[1];
+    // }
+    
+    // for(int i=2; i<n; i++){
+    //     if(a[i] > max){
+    //         max = a[i];
+    //     }
+    //     else if(a[i] < min){
+    //         min = a[i];
+    //     }
+    // }
+    
+    for(int i=0; i<n; i++) cout<<a[i]<<" ";
+    cout<<endl;
+    cout<<a[n-1]-a[0];
+    return 0;
+}
