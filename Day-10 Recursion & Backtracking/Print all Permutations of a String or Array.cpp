@@ -47,3 +47,47 @@ int main()
 
     return 0;
 }
+
+
+// OPTIMAL  ================================================ TC = n! * n =================================================================================================
+
+/*
+Intution:
+ Reason behind swapping is that Every number should be at every particular index
+*/
+
+void findPermutation(int index, vector<int> &nums, vector<vector<int>> &ans){
+    // Base - when we reach end of the array 
+    if(index == nums.size()){
+        ans.push_back(nums);
+        return;
+    }
+    
+    // Iterate over the nums array 
+    for(int i = index; i < nums.size(); i++){
+        // Swap the current element i.e at index with all elements of the array from 'i' to 'nums.size()-1'
+        swap(nums[index], nums[i]);
+        findPermutation(index+1, nums, ans);
+        
+        // Swap the elements back for further calls
+        swap(nums[index], nums[i]);
+    }
+}
+
+int main()
+{
+    vector<int> nums {1, 2, 3};
+    
+    vector<vector<int>> ans;
+    
+    findPermutation(0, nums, ans);
+    
+    for(auto it : ans){
+        for(auto num : it){
+            cout<<num<<" ";
+        }
+        cout<<endl;
+    }
+
+    return 0;
+}
