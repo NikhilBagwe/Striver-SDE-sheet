@@ -1,4 +1,4 @@
-// BRUTE ===================== TC = O(n^2) =================================================================================================================
+// BRUTE ===================== TC = O(n^2) ================================================================================================================================
 
 // TC = O(n^2) -> bcoz we are running 'isSafe' func containing 3 while loops inside 'solve' func for loop everytime
 
@@ -87,6 +87,66 @@ int main()
     }
     
     solve(0, board, ans, n);
+
+    cout<<ans.size();
+    
+    return 0;
+}
+
+// OPTIMAL  =============================================== HASHING =========================================================================================
+
+/*
+For a diagonal (from right to left) :  
+=> For lower Diagonal:
+   addition of any Row no of diagonal + addition of any column no. of diagonal = is same i.e [Row + col]
+- Thus we can track whether any 'Queen' was place before in the lowerDiagonal before instead of looping 
+
+=> For upper Diagonal:
+   Formula is : n-1 + (col - row)
+*/
+
+void solve(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &leftRow, vector<int> &upperDiagonal, vector<int> &lowerDiagonal, int n){
+    
+    // Base - when you reach at he last column of board 
+    if(col == n){
+        ans.push_back(board);
+        return;
+    }
+    
+    for(int row = 0; row < n; row++){
+        if(leftRow[row] == 0 && lowerDiagonal[row+col] == 0 && upperDiagonal[n-1 + col - row] == 0){
+            // MArk the Queen 
+            board[row][col] = 'Q';
+            leftRow[row] = 1;
+            lowerDiagonal[row+col] = 1;
+            upperDiagonal[n-1 + col - row] = 1;
+            
+            solve(col+1, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
+            
+            // Unmark the Queen for backtracking purpose
+            board[row][col] = '.';
+            leftRow[row] = 0;
+            lowerDiagonal[row+col] = 0;
+            upperDiagonal[n-1 + col - row] = 0;
+        }
+    }
+}
+
+int main()
+{
+    int n = 4; // No. of queens 
+    
+    vector<vector<string>> ans;
+    vector<string> board(n);
+    string s(n, '.');
+    
+    for(int i=0; i<n; i++){
+        board[i] = s;
+    }
+    
+    vector<int> leftRow(n, 0), upperDiagonal(2*n - 1, 0), lowerDiagonal(2*n - 1, 0);
+    
+    solve(0, board, ans, leftRow, upperDiagonal, lowerDiagonal, n);
 
     cout<<ans.size();
     
