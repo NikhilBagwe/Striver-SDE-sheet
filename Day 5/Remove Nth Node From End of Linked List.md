@@ -45,3 +45,34 @@ public:
     }
 };
 ```
+
+## OPTIMAL - TC = O(n)  ,  SC = O(1)
+
+```cpp
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        // Init dummy node and point it's 'next' to head
+        ListNode *dummy = new ListNode();
+        dummy->next = head;
+        // Init slow anf fast ptr and point them to dummy
+        ListNode *slow = dummy, *fast = dummy;
+        
+        // Move fast ptr by 'n' steps
+        while(n--){
+            fast = fast->next;
+        }
+        
+        // Move fast and slow ptrs until (fast->next != NULL)
+        while(fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next;
+        }
+        
+        // Slow will be standing on the previous node of the node to be deleted so make required connections
+        slow->next = slow->next->next;
+        
+        return dummy->next;
+    }
+};
+```
