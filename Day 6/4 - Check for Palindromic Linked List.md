@@ -35,6 +35,7 @@ public:
 - Find the middle node of the LL
 - 1-> 2-> 3-> 3-> 2-> 1
 - Now reverse the LL from next node of middle node
+- 1-> 2-> 3-> 1-> 2-> 3
 - Now start comparing from the head of LL with the reversed LL after middle node.
 
 ```cpp
