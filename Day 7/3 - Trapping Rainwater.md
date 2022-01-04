@@ -76,11 +76,57 @@ public:
 };
 ```
 
+## BETTER - TC = O(n) , SC = O(1)
 
+- Init left and right pointers and leftmax = rightmax = 0
+- Apply Two pointer approach
+- Instead of creating 2 separate arrays for prefix and suffix, maintain leftmax and rightmax while traversing the array
 
+```cpp
+class Solution {
+public:
+    int trap(vector<int>& arr) {
+        int n = arr.size();
+        
+        int left = 0, right = n-1;
+        int leftMax = 0, rightMax = 0;
+        int res = 0;
+        
+        // Move until left ptr crosses right
+        while(left <= right){
+            
+            // Intution - This check makes sure that there exists rightMax of greater size than current leftMax
+            if(arr[left] <= arr[right]){
+                // Update 'leftMax' value
+                if(arr[left] >= leftMax){
+                    leftMax = arr[left];
+                }
+                
+                // Store the trapped water into 'res'
+                else{
+                    res += leftMax - arr[left];
+                }
+                
+                left++;
+            }
+            
+            // Intution - This check makes sure that there exists leftMax of greater size than current rightMax
+            else{
+                if(arr[right] >= rightMax){
+                    rightMax = arr[right];
+                }
+                
+                else{
+                    res += rightMax - arr[right];
+                }
+                
+                right--;
+            }
+        }
+        
+        return res;
+    }
+};
 
-
-
-
-
+```
 
