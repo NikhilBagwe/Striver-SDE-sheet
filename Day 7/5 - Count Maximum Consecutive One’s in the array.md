@@ -1,4 +1,4 @@
-## OPTIMAL - 
+## OPTIMAL - TC = O(n) , SC = O(1)
 
 - ones = keeps track of count of current consecutive 1's
 - maxones = stores the max count of consective 1's throughout the array
