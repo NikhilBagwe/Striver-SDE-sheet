@@ -3,6 +3,7 @@
 ## OPTIMAL - TC = N x log(M x 10^d) , SC = O(1)
 
 - TC = n -for multiply func, log(M x 10^d) - as our search space in terms of decimal points upto 10^-6 i.e 'd'
+- For this example : low =1, high = 27 -> Search space = 1.0,1.1,1.2..., 2.0,2.1.. ..26.9, 27.0
 
 ```cpp
 #include <bits/stdc++.h>
