@@ -1,5 +1,6 @@
-## BRUTE - TC = O(n*m) + (n*m)log(n*m) , SC = O(n*m)
+## BRUTE - TC = O(n x m) + (n x m)log(n x m) , SC = O(n*m)
 
+- In TC, n = no. of rows, m = column
 - Store all the elements of matrix into an array
 - Sort that array
 - Return the array's mid element
