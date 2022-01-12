@@ -32,3 +32,35 @@ public:
     }
 };
 ```
+
+## BETTER - TC = SC = O(n1 + n2) - MergeSort
+
+```cpp
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) { 
+        int n1 = nums1.size(), n2 = nums2.size();
+        int i = 0, j = 0, k = 0;
+        int result[n1 + n2];
+        
+        // Apply 'merge' step from mergesort
+        while(i < n1 && j < n2){
+            if(nums1[i] < nums2[j]) result[k++] = nums1[i++];
+            else result[k++] = nums2[j++];
+        }
+        
+        while(i < n1) result[k++] = nums1[i++];
+        while(j < n2) result[k++] = nums2[j++];
+        
+        // size of 'result' array
+        int n = n1+n2;
+        
+        if(n % 2 != 0){
+            return (double)result[n/2];
+        }
+        else{
+            return ((double)result[(n/2)-1] + (double)result[n/2])/2;
+        }
+    }
+};
+```
