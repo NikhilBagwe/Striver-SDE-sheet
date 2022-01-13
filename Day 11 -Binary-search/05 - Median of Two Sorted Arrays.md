@@ -104,7 +104,8 @@ public:
         while(low <= high){
             // Initialize the cuts
             int cut1 = low + (high-low)/2;
-            // cut2 = Total no. of required elements to form an array(eg: if addn of both array sizes is 8, then each array is of size - 4) - Already present elements
+            // cut2 = Total no. of required elements to form an array(eg: if addn of both array sizes 
+            //is 8, then each array is of size - 4) - Already present elements
             int cut2 = ((n+m)/2) - cut1;
             
             // Initialize l1, r1, l2, r2 and also check for extreme cases for out of bound errors
