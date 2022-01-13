@@ -74,6 +74,11 @@ public:
 - In case of even size arrays - max(l1,l2) and min(r1,r2) will give you the required 2 numbers to find median.
 - In case of diff. size arrays i.e odd - min(r1,r2) is the median and binary search must be applied on smaller size array to avoid out of bound error.
 
+- Border cases : Check in code comments
+
+
+```cpp
+/*
 - Border cases :
 
 1. If r1 or r2 is absent, consider r1/r2 as 'INT_MAX'
@@ -83,8 +88,7 @@ public:
 2. If l1 or l2 is absent, consider l1/l2 as 'INT_MIN' 
    eg: |2 3 4 5  <- l1 absent
        6 7|8
-
-```cpp
+*/
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) { 
