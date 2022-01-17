@@ -45,3 +45,65 @@ public:
     }
 };
 ```
+
+## Oueue using two stacks - Amortized O(1) solution
+
+- TC = O(1) , SC = O(n)
+- Here Push and Pop operations take O(1) time.
+- Pop and Peek/top operation takes Amortized O(1) time meaning most of the times they take O(1) time but in certain conditions we transfer 'n' elements taking O(n) time.
+
+```cpp
+class MyQueue {
+public:
+    stack<int> input; // Input stack
+    stack<int> output; // Output stack
+    
+    // Just push 'x' into 's1'.
+    void push(int x) {
+        input.push(x);
+    }
+    
+    /* Pop algo :
+    1. If 'output' stack is not empty, just pop it's top element.
+    2. Else, transfer all elements from input to output stack and then pop output stack's top element.
+    */
+    int pop() {
+        if(!output.empty()){
+            int popped = output.top();
+            output.pop();
+            return popped;
+        }
+        else{
+            while(!input.empty()){
+                output.push(input.top());
+                input.pop();
+            }
+            
+            int popped = output.top();
+            output.pop();
+            return popped;
+        }
+    }
+    
+    // 1. If 'output' stack is not empty, just return it's top element.
+    // 2. Else, transfer all elements from input to output stack and then return output stack's top element.
+    int peek() {
+        if(!output.empty()){
+            return output.top();
+        }
+        else{
+            while(!input.empty()){
+                output.push(input.top());
+                input.pop();
+            }
+            
+            return output.top();
+        }
+    }
+    
+    bool empty() {
+        return (input.empty() && output.empty());
+    }
+};
+
+```
