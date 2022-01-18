@@ -74,3 +74,38 @@ vector<int> nextGreater(vector<int> &arr, int n) {
     return ans;
 }
 ```
+
+## OPTIMAL - Circular array 
+
+- Assume you copy pasted the same array after the given array imaginarily.
+- eg: [2, 10, 12, 1, 11] = [2, 10, 12, 1, 11, 2, 10, 12, 1, 11]
+- Now we can easily access those imaginary indexes by Modulo method i.e "i % n" n->size of arr
+- eg : [2, 10, 12, 1, 11, 2, 10, 12, 1, 11]
+- Index- 0 .............................10
+- To access imaginary index 5 i.e '2' -> 5 % 5 = 0th index of original arr -> arr[0] = 2
+- Index 7 -> 7 % 5 = 2nd index -> arr[2] = 12
+- Here we will iterate from "0 to 2n-1" array
+
+```cpp
+vector < int > nextGreaterElements(vector < int > & nums) {
+      int n = nums.size();
+      vector < int > nge(n, -1);
+      stack < int > st;
+      
+      for (int i = 2*n - 1; i >= 0; i--) {
+        while (!st.empty() && st.top() <= nums[i % n]) {
+          st.pop();
+        }
+
+        if (i < n) {
+          if (!st.empty()) nge[i] = st.top();
+        }
+        st.push(nums[i % n]);
+      }
+      
+      return nge;
+    }
+```
+
+
+
