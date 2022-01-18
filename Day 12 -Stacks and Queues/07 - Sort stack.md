@@ -18,7 +18,7 @@ void insert(stack<int> &st, int temp){
 void sortStack(stack<int> &st)
 {
     // Base case - 1 element is always sorted
-	  if(st.size() == 1) return;
+    if(st.size() == 1) return;
     
     // Store the top element and than pop it and call sortStack() again
     int temp = st.top();
