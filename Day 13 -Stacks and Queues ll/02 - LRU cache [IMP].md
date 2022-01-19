@@ -1,4 +1,10 @@
-## OPTIMAL : TC = 
+## OPTIMAL : TC = O(1)-In very rare cases when there are collisons in map, its O(n) , SC = O(1)
+
+- "Least Recently Used" means suppose you have 4 T-shirts. You wear 1st T-shirt on Monday, 2nd on tue, 3rd on wed and 4th on thu. So here the least recently used is 1st 
+  T-shirt that you wore on monday as 4th is the "Most recently used" T-shirt.
+- Here we use a Doubly LL and Hash map to implement LRU cache.
+- In code, whenever a action is performed whether its get or put, the node on which action is performed becomes 'Most recently used' node so attach it next after head node.
+- At times when the capacity of LRU cache becomes full, we remove the 'Least Recently used' node which is the node present before tail node.
 
 ```cpp
 class LRUCache
@@ -31,7 +37,7 @@ public:
         tail->prev = head;
     }
     
-    // New node is always added next to head node as it is the 'Least Recently used' node
+    // New node is always added next to head node as it is 'Most Recently used' node
     void addnode(node *newNode){
         // Store the node present just after head
         node *temp = head->next;
