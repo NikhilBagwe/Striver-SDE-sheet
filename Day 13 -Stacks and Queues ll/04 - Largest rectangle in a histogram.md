@@ -32,3 +32,44 @@ int largestRectangle(vector < int > & arr) {
     return maxArea;
 }
 ```
+
+------------------------------- OR -----------------------------------------------
+
+```cpp
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& arr) {
+        int maxArea = 0;
+        int n = arr.size();
+        
+        if(n == 1) return arr[0]*1;
+        
+        for(int i = 0; i < n; i++){
+            int width = 1, cur = i+1;
+            
+            // Iterate on right side
+            while(cur < n){
+                if(arr[i] <= arr[cur]) width++;
+                cur++;
+            }
+            
+            // Iterate on left side
+            if(i == 0){
+                continue;
+            }
+            else{
+                cur = i-1;
+                while(cur >= 0){
+                    if(arr[i] <= arr[cur]) width++;
+                    cur--;
+                }
+            }
+            
+            int area = arr[i] * width;
+            maxArea = max(maxArea, area);
+        }
+        
+        return maxArea;
+    }
+};
+```
